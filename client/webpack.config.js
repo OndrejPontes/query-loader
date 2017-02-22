@@ -10,6 +10,8 @@ const config = {
     'es5-shim/es5-sham',
     'babel-polyfill',
     './app/bundles/HelloWorld/startup/HelloWorldApp',
+    'bootstrap-loader',
+    'jquery'
   ],
 
   output: {
@@ -30,6 +32,9 @@ const config = {
         NODE_ENV: JSON.stringify(nodeEnv),
       },
     }),
+      new webpack.ProvidePlugin({
+          jQuery: 'jquery'
+      }),
   ],
   module: {
     loaders: [
@@ -41,6 +46,10 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
       },
     ],
   },
